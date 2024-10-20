@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <link href="index.css" rel="stylesheet">
+<head>
+    <title>Задача о крестьянине, волке, козе и капусте</title>
+</head>
+<body>
+
+  <div id="container">
+    <h1>Решите задачу о крестьянине, волке, козе и капусте</h1>
+    <input type="text" id="playerName" placeholder="Введите имя">
+    <button onclick="startGame()">Начать игру</button>
+    <div id="game">
+      <div id="left"></div>
+      <div id="right"></div>
+    </div>
+    <div id="solution"></div>
+    <table id="leaderboard"></table>
+  </div>
+  <script>
+    const items = ['wolf', 'goat', 'cabbage'];
+    let leftSide = { wolf: true, goat: true, cabbage: true };
+    let rightSide = {};
+    let currentSide = "left";
+    let solutionSteps = [];
+    let leaderboard = [];
+  
+    function startGame() {
+      leftSide = { wolf: true, goat: true, cabbage: true };
+      rightSide = {};
+      currentSide = "left";
+      solutionSteps = [];
+      document.getElementById("solution").innerHTML = "";
+      updateDisplay();
+      const playerName = document.getElementById("playerName").value;
+      if (playerName) {
+        solve();
+      } else {
+        alert("Введите имя!"); 
+      }
+    }
+  
+    function moveItem(item) {
+      if (currentSide === "left") {
+        leftSide[item] = false;
+        rightSide[item] = true;
+      } else {
+        leftSide[item] = true;
+        rightSide[item] = false;
+      }
+      updateDisplay();
+    }
+  
+    function solve() {
+      moveItem('goat');
+      solutionSteps.push("Крестьянин везёт козу на другой берег.");
+      solutionSteps.push("Крестьянин возвращаеться обратно и берёт волка.");
+      moveItem('wolf');
+      solutionSteps.push("Крестьянин везёт волка на другой берег.");
+      solutionSteps.push("Крестьянин берёт козу.");
+      moveItem('goat');
+      solutionSteps.push("Крестьянин возвращается с козой и берёт капусту.");
+      moveItem('cabbage');
+      solutionSteps.push("Крестьянин везёт капусту на другой берег.");
+      solutionSteps.push("Крестьянин возвращаеться обратно и берёт козу.");
+      moveItem('goat');
+      solutionSteps.push("Крестьянин возвращается с козой на правый.");
+      solutionSteps.push("Задача решена!");
+      displaySolution();
+    }
+  
+    function displaySolution() {
+        const solutionDiv = document.getElementById("solution");
+        solutionDiv.innerHTML = solutionSteps.map(step => `<p>${step}</p>`).join('');
+    }
+  
+    function updateDisplay() {
+      const leftSideDiv = document.getElementById("left");
+      const rightSideDiv = document.getElementById("right");
+      leftSideDiv.innerHTML = "";
+      rightSideDiv.innerHTML = "";
+  
+      items.forEach(item => {
+        if (leftSide[item]) { leftSideDiv.innerHTML += `<img src="images/${item}.png" alt="${item}">`; }
+        if (rightSide[item]) { rightSideDiv.innerHTML += `<img src="images/${item}.png" alt="${item}">`; }
+      });
+    }
+  </script>
+  </body>
+  </html>
