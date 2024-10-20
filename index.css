@@ -1,0 +1,38 @@
+body { 
+    font-family:'Times New Roman', Times, serif; 
+    background-color: rgb(46, 38, 92);
+}
+#container {
+    width: 950px; 
+    margin: 20px auto; 
+    border: 1px solid #cccccc00;
+    background-color: rgb(61, 85, 131); 
+    padding: 20px; 
+}
+#game { 
+    display: flex; 
+    justify-content: space-between;
+    background-image: url("river.jpg"); 
+}
+#left, #right { 
+    width: 200px; 
+    text-align: center; 
+    border: 1px solid #eeeeee00; 
+    padding: 10px; 
+}
+img { 
+    width: 200px; 
+    margin: 15px; 
+}
+#solution { 
+    margin-top: 20px; 
+}
+#leaderboard { 
+    margin-top: 20px; 
+    width: 100%; 
+    border-collapse: collapse; 
+}
+#leaderboard th, #leaderboard td { 
+    border: 1px solid #ddd; 
+    padding: 8px; 
+}
